@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Task Assignment - DAA Hackathon</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #07111f, #102a43);
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 15px;
+            background: rgba(0, 0, 0, 0.25);
+            border-bottom: 2px solid #35d399;
+        }
+
+        header h1 {
+            color: #35d399;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        header p {
+            color: #c5d2e5;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        h2 {
+            color: #35d399;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            line-height: 1.7;
+            color: #d7e0ec;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #45617e;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #183b5c;
+            color: #35d399;
+        }
+
+        td {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        input {
+            width: 80px;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        button {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 8px;
+            background: #35d399;
+            color: #06131f;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #20b982;
+            transform: translateY(-1px);
+        }
+
+        .result {
+            display: none;
+        }
+
+        .result-table {
+            margin-top: 15px;
+        }
+
+        .total {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 10px;
+            background: #123c35;
+            color: #35d399;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .algorithm {
+            line-height: 1.8;
+            color: #d7e0ec;
+        }
+
+        .step {
+            margin: 8px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #9fb1c7;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                width: 95%;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            input {
+                width: 55px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Employee Task Assignment</h1>
+    <p>DAA Hackathon | Design and Analysis of Algorithms</p>
+</header>
+
+<div class="container">
+
+    <!-- Problem -->
+    <div class="card">
+        <h2>Problem Statement</h2>
+
+        <p class="description">
+            A company has several employees and tasks.
+            Each employee requires a different amount of time to complete
+            each task. Every task must be assigned to exactly one employee,
+            and each employee can handle only one task.
+            The goal is to find an assignment that minimizes the
+            total completion time.
+        </p>
+    </div>
+
+    <!-- Input -->
+    <div class="card">
+
+        <h2>Time Matrix</h2>
+
+        <p class="description">
+            Enter the time required by each employee to complete each task.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee</th>
+                    <th>Task 1</th>
+                    <th>Task 2</th>
+                    <th>Task 3</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <th>Employee 1</th>
+
+                    <td>
+                        <input type="number" id="e1t1" value="10">
+                    </td>
+
+                    <td>
+                        <input type="number" id="e1t2" value="5">
+                    </td>
+
+                    <td>
+                        <input type="number" id="e1t3" value="8">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Employee 2</th>
+
+                    <td>
+                        <input type="number" id="e2t1" value="7">
+                    </td>
+
+                    <td>
+                        <input type="number" id="e2t2" value="6">
+                    </td>
+
+                    <td>
+                        <input type="number" id="e2t3" value="9">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Employee 3</th>
+
+                    <td>
+                        <input type="number" id="e3t1" value="8">
+                    </td>
+
+                    <td>
+                        <input type="number" id="e3t2" value="4">
+                    </td>
+
+                    <td>
+                        <input type="number" id="e3t3" value="7">
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <button onclick="findAssignment()">
+            Find Optimal Assignment
+        </button>
+
+    </div>
+
+    <!-- Result -->
+    <div class="card result" id="result">
+
+        <h2>Optimal Assignment</h2>
+
+        <table class="result-table">
+
+            <thead>
+                <tr>
+                    <th>Employee</th>
+                    <th>Assigned Task</th>
+                    <th>Completion Time</th>
+                </tr>
+            </thead>
+
+            <tbody id="resultBody"></tbody>
+
+        </table>
+
+        <div class="total" id="totalTime"></div>
+
+    </div>
+
+    <!-- Algorithm -->
+    <div class="card">
+
+        <h2>Algorithm / Approach</h2>
+
+        <div class="algorithm">
+
+            <div class="step">
+                <b>Step 1:</b> Create the employee-task time matrix.
+            </div>
+
+            <div class="step">
+                <b>Step 2:</b> Consider all possible assignments.
+            </div>
+
+            <div class="step">
+                <b>Step 3:</b> Calculate the total completion time.
+            </div>
+
+            <div class="step">
+                <b>Step 4:</b> Compare the assignment times.
+            </div>
+
+            <div class="step">
+                <b>Step 5:</b> Select the assignment with minimum total time.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    DAA Hackathon | Employee Task Assignment
+</footer>
+
+
+<script>
+
+function findAssignment() {
+
+    // Get input values
+
+    let matrix = [
+
+        [
+            Number(document.getElementById("e1t1").value),
+            Number(document.getElementById("e1t2").value),
+            Number(document.getElementById("e1t3").value)
+        ],
+
+        [
+            Number(document.getElementById("e2t1").value),
+            Number(document.getElementById("e2t2").value),
+            Number(document.getElementById("e2t3").value)
+        ],
+
+        [
+            Number(document.getElementById("e3t1").value),
+            Number(document.getElementById("e3t2").value),
+            Number(document.getElementById("e3t3").value)
+        ]
+
+    ];
+
+
+    /*
+        For 3 employees and 3 tasks,
+        we check all possible assignments.
+    */
+
+    let bestTotal = Infinity;
+    let bestAssignment = [];
+
+
+    for (let t1 = 0; t1 < 3; t1++) {
+
+        for (let t2 = 0; t2 < 3; t2++) {
+
+            for (let t3 = 0; t3 < 3; t3++) {
+
+                // Every task must be different
+
+                if (
+                    t1 === t2 ||
+                    t1 === t3 ||
+                    t2 === t3
+                ) {
+                    continue;
+                }
+
+
+                let total =
+                    matrix[0][t1] +
+                    matrix[1][t2] +
+                    matrix[2][t3];
+
+
+                if (total < bestTotal) {
+
+                    bestTotal = total;
+
+                    bestAssignment = [
+                        t1,
+                        t2,
+                        t3
+                    ];
+                }
+            }
+        }
+    }
+
+
+    let taskNames = [
+        "Task 1",
+        "Task 2",
+        "Task 3"
+    ];
+
+
+    let resultBody =
+        document.getElementById("resultBody");
+
+    resultBody.innerHTML = "";
+
+
+    for (let i = 0; i < 3; i++) {
+
+        let row =
+            document.createElement("tr");
+
+        row.innerHTML = `
+
+            <td>Employee ${i + 1}</td>
+
+            <td>
+                ${taskNames[bestAssignment[i]]}
+            </td>
+
+            <td>
+                ${matrix[i][bestAssignment[i]]} minutes
+            </td>
+
+        `;
+
+        resultBody.appendChild(row);
+    }
+
+
+    document.getElementById("totalTime").innerHTML =
+        "Minimum Total Time: " +
+        bestTotal +
+        " minutes";
+
+
+    document.getElementById("result").style.display =
+        "block";
+}
+
+</script>
+
+</body>
+</html>
